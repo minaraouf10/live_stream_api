@@ -2,6 +2,7 @@ const { meeting } = require("../models/meeting.model")
 const { meetingUser } = require("../models/meeting-user.model")
 
 async function getAllMeetingUsers({ meetId, callback }) {
+    console.log('getAllMeetingUsers = ' + meetId);
     meetingUser.find({ meetingId: meetId })
         .then((response) => {
             return callback(null, response);
@@ -12,6 +13,7 @@ async function getAllMeetingUsers({ meetId, callback }) {
 }
 
 async function startMeeting(params, callback) {
+    console.log(params);
     const meetingSchema = new meeting(params);
     meetingSchema
         .save()
@@ -61,44 +63,45 @@ async function checkMeetingExisits(meetingId, callback) {
         });
 }
 
-async function getMeetingUser(params,callback){
-    const {meetingId, userId} =params;
+async function getMeetingUser(params, callback) {
+    console.log("log getMeetingUser ")
+    const { meetingId, userId } = params;
 
-    meetingUser.find({meetingId,userId})
-    .then((response)=>{
-        return callback(null,response[0])
-    })
-    .catch((error)=>{
-        return callback(error);
-    });
-}
-
-async function updateMeetingUser(params,callback){
-    meetingUser
-    .updateOne({userId:params.userId },{$set: params },{new :true})
-    .then((response)=>{
-        return callback(null,response);
-    })
-    .catch((error)=>{
-        return callback(error);
-    });
-}
-
-async function getUserBySocketId(params,callback){
-    const { meetingId,socketId}=params;
-
-    meettingUser
-        .find({meetingId,socketId})
-        .limit(1)
-        .then((response)=>{
-            return callback(null,response);
+    meetingUser.find({ meetingId, userId })
+        .then((response) => {
+            return callback(null, response[0])
         })
-        .catch((error)=>{
+        .catch((error) => {
             return callback(error);
         });
 }
 
-module.exports={
+async function updateMeetingUser(params, callback) {
+    meetingUser
+        .updateOne({ userId: params.userId }, { $set: params }, { new: true })
+        .then((response) => {
+            return callback(null, response);
+        })
+        .catch((error) => {
+            return callback(error);
+        });
+}
+
+async function getUserBySocketId(params, callback) {
+    const { meetingId, socketId } = params;
+
+    meettingUser
+        .find({ meetingId, socketId })
+        .limit(1)
+        .then((response) => {
+            return callback(null, response);
+        })
+        .catch((error) => {
+            return callback(error);
+        });
+}
+
+module.exports = {
     startMeeting,
     joinMeeting,
     getAllMeetingUsers,

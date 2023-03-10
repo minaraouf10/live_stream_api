@@ -55,7 +55,7 @@ function forwardConnectionRequest(meetingId, socket, meetingServer, payload) {
                 }
             });
 
-            meettingServer.to(results.socketId).emit('message', sendPayLoad);
+            meetingServer.to(results.socketId).emit('message', sendPayLoad);
         }
     })
 }

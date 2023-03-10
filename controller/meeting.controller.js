@@ -11,6 +11,7 @@ exports.startMeeting = (req, res, next) => {
 
     meetingServices.startMeeting(model, (error, results) => {
         if (error) {
+            console.log("log startMeeting " +error);
             return next(error);
         }
         return res.status(200).send({
@@ -39,6 +40,7 @@ exports.getAllMeetingUsers = (req, res, next) => {
     const { meetingId } = req.query;
     meetingServices.getAllMeetingUsers(meetingId, (error, results) => {
         if (error) {
+            console.log("log getAllMeetingUsers " +error);
             return next(error);
         }
         return res.status(200).send({
