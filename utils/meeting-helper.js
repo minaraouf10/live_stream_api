@@ -2,16 +2,19 @@ const meetingServices = require("../services/meeting.service");
 const { MeetingPayloadEnum } = require("../utils/meeting-payload.enum");
 
 async function joinMeeting(meetingId, socket, meetingServer, payload) {
+    console.log(payload.data,"payload data")
     const { userId, name } = payload.data;
 
     meetingServices.isMeetingPresent(meetingId, async (error, results) => {
+        console.log(error)
         if (error && !results) {
             sendMessage(socket, {
                 type: MeetingPayloadEnum.NOT_FOUND
             });
         }
-
+        console.log(results,"results")   
         if (results) {
+            console.log(results)
             addUser(socket, { meetingId, userId, name }).then((result) => {
                 if (result) {
                     sendMessage(socket, {

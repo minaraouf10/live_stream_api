@@ -19,7 +19,7 @@ const meeting = mongoose.model(
         meetingUsers: [
             {
                 type: mongoose.Schema.Types.ObjectId,
-                ref: "MeetingUsers"
+                ref: "MeetingUser"
             }
         ]
     }, {
@@ -27,7 +27,7 @@ const meeting = mongoose.model(
             transform: function (doc, ret) {
                 ret.id = ret._id.toString(),
                     delete ret._id;
-                    delete ret.__v;
+                delete ret.__v;
             }
         }
     },
@@ -35,5 +35,5 @@ const meeting = mongoose.model(
 );
 
 module.exports = {
-    Meeting: meeting //meeting
+    meeting
 }

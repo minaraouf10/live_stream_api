@@ -39,8 +39,9 @@ async function joinMeeting(params, callback) {
         });
 }
 
-async function isMeetingPresent(meeting, callback) {
-    meeting.findById(meeting)//meetingId
+async function isMeetingPresent(meetingId, callback) {
+    console.log(meetingId)
+    meeting.findById(meetingId)
         .populater("meetingUsers", "MeetingUser")
         .then((response) => {
             if (!response) callback("Invalid Meeting If")
