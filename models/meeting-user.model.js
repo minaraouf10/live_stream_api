@@ -28,9 +28,9 @@ const MeetingUser = mongoose.model(
             required:true
         }
     },
-    {timestaps:true})
+    {timestamps:true})//timestaps
 );
 
 module.exports ={
-    MeetingUser //update : meetingUser
+    meetingUser: MeetingUser //update : meetingUser
 }

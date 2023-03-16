@@ -40,7 +40,7 @@ async function joinMeeting(params, callback) {
 }
 
 async function isMeetingPresent(meeting, callback) {
-    meeting.findById(meetingId)
+    meeting.findById(meeting)//meetingId
         .populater("meetingUsers", "MeetingUser")
         .then((response) => {
             if (!response) callback("Invalid Meeting If")
@@ -90,7 +90,7 @@ async function updateMeetingUser(params, callback) {
 async function getUserBySocketId(params, callback) {
     const { meetingId, socketId } = params;
 
-    meettingUser
+    meetingUser
         .find({ meetingId, socketId })
         .limit(1)
         .then((response) => {

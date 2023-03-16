@@ -1,7 +1,7 @@
 const MeetingPayloadEnum = {
     JOIN_MEETING: 'join-meeting',
     JOINED_MEETING: 'joined-meeting',
-    USER_Joined: 'user-joined',
+    USER_JOINED: 'user-joined',
     CONNECTION_REQUEST: 'connection-request',
     INCOMING_CONNECTION_REQUEST: 'incoming-connection-request',
     OFFER_SDP: 'offer-sdp',

@@ -22,7 +22,7 @@ async function joinMeeting(meetingId, socket, meetingServer, payload) {
                 }
 
                 broadcastUsers(meetingId, socket, meetingServer, {
-                    type: MeetingPayloadEnum.USER_Joined,
+                    type: MeetingPayloadEnum.USER_JOINED,
                     data: {
                         userId,
                         name,
@@ -79,7 +79,7 @@ function forwardIceCandidata(meetingId, socket, meetingServer, payload) {
                 }
             });
 
-            meettingServer.to(results.socketId).emit('message', sendPayLoad);
+            meetingServer.to(results.socketId).emit('message', sendPayLoad);
         }
     })
 }
@@ -102,7 +102,7 @@ function forwardOfferSDP(meetingId, socket, meetingServer, payload) {
                 }
             });
 
-            meettingServer.to(results.socketId).emit('message', sendPayLoad);
+            meetingServer.to(results.socketId).emit('message', sendPayLoad);
         }
     })
 }
@@ -136,7 +136,7 @@ function userLeft(meetingId, socket, meetingServer, payload) {
     const { userId } = payload.data;
 
     broadcastUsers(meetingId, socket, meetingServer, {
-        type: MeetingPayloadEnum.userLeft,
+        type: MeetingPayloadEnum.USER_LEFT,
         data: {
             userId: userId
         }
@@ -174,6 +174,7 @@ function forwardEvent(meetingId, socket, meetingServer, payload) {
 }
 
 function addUser(socket, { meetingId, userId, name }) {
+    console.log("Add User");
     let promise = new Promise(function (resolve, reject) {
         meetingServices.getMeetingUser({ meetingId, userId }, (error, results) => {
             if (!results) {
@@ -183,7 +184,7 @@ function addUser(socket, { meetingId, userId, name }) {
                     userId: userId,
                     joined: true,
                     name: name,
-                    iaAlive: true
+                    isAlive: true
                 };
 
                 meetingServices.joinMeeting(model, (error, results) => {

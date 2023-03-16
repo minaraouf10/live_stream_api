@@ -48,7 +48,7 @@ function handleMessage(meetingId, socket, message, meetingServer) {
             break;
         case MeetingPayloadEnum.VIDEO_TOGGLE:
         case MeetingPayloadEnum.AUDIO_TOGGLE:
-            meetingHelper.forwardEvent(meetingId, socket, payload, meetingServer, payload)
+            meetingHelper.forwardEvent(meetingId, socket, meetingServer, payload)
             break;
         case MeetingPayloadEnum.UNKNOWN:
             break;
